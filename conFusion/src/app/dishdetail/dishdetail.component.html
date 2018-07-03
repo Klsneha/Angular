@@ -1,0 +1,74 @@
+<!--<p>
+  dishdetail works!
+</p>-->
+<div class="container"
+    fxLayout="row"
+    fxLayout.sm="column"
+    fxLayout.xs="column"
+    fxLayoutAlign.gt-md="space-around center"
+    fxLayoutGap="10px" 
+    fxLayoutGap.xs="0">
+
+  <!--<div fxFlex="40">
+    <p>Display the details of the Dish here</p>
+  </div>-->
+
+  <div fxFlex="40" *ngIf="dish">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>
+            <h3>{{dish.name | uppercase}}</h3>
+          </mat-card-title>
+        </mat-card-header>
+        <img mat-card-image height="200px" rowHeight="20px" src={{dish.image}} alt={{dish.name}}>
+        <mat-card-content>
+          <p>{{dish.description}}
+          </p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button>LIKE</button>
+          <button mat-button>SHARE</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  
+
+  <!--<div fxFlex="40">
+    <p>Display the list of comments here</p>
+  </div>-->
+
+  <!--<div fxFlex>
+      <mat-grid-list cols="2" rowHeight="200px">
+          <mat-grid-tile-header>
+              <h1 matLine>Comments</h1>
+            </mat-grid-tile-header>
+        <mat-grid-tile *ngFor="let comments of dish">
+          <h1 matLine>comments.comment</h1>
+          <h1 matLine>comments.author</h1>
+          <h1 matLine>comments.date</h1>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </div>-->
+
+    <div fxFlex="40" *ngIf="dish">
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>
+              <h3>Comments</h3>
+            </mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+                  <mat-list>
+                      <mat-list-item *ngFor="let comments of dish.comments">
+                      <p matLine>{{comments.comment}}</p>
+                      <p matLine>{{comments.rating}} Stars</p>
+                      <p matLine>--{{comments.author}} {{comments.date|date}}</p>
+                    </mat-list-item>
+                  </mat-list>
+          </mat-card-content>
+          
+        </mat-card>
+      </div>
+
+</div>
+
