@@ -11,6 +11,7 @@ import { MatCardModule } from '@angular/material/card';
 
 
 import { MatButtonModule } from '@angular/material/button';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 import { AppComponent } from './app.component';
@@ -71,6 +72,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     ReactiveFormsModule,
     MatSelectModule,
     MatSlideToggleModule,
+    MatProgressSpinnerModule,
     AppRoutingModule
   ],
   providers: [ DishService , PromotionService, LeaderService],
