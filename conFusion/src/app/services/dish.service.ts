@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Dish } from '../shared/dish';
-import { DISHES } from '../shared/dishes';
+//import { DISHES } from '../shared/dishes';
 
 import { of } from 'rxjs';
 import { delay } from 'rxjs/operators';
@@ -8,6 +8,13 @@ import {Observable} from 'rxjs/Observable';
 
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/delay';
+import 'rxjs/add/operator/catch';
+
+import { map } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
+import { baseURL } from '../shared/baseurl';
+import {Http, Response} from '@angular/http';
+import {ProcessHTTPMsgService} from './process-httpmsg.service';
 
 
 
@@ -16,7 +23,7 @@ import 'rxjs/add/operator/delay';
 })
 export class DishService {
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   //getDishes(): Promise<Dish[]> {
    // return Promise.resolve(DISHES);
@@ -28,7 +35,8 @@ export class DishService {
  // }
 
  getDishes(): Observable<Dish[]> {
-  return of(DISHES).pipe(delay(2000));
+ // return of(DISHES).pipe(delay(2000));
+ return this.http.get<Dish[]>(baseURL + 'dishes');
 }
 
   //getDish(id: number):Promise<Dish> {
@@ -39,7 +47,8 @@ export class DishService {
   }*/
 
   getDish(id: number): Observable<Dish> {
-    return of(DISHES.filter((dish) => (dish.id === id))[0]).pipe(delay(2000));
+   // return of(DISHES.filter((dish) => (dish.id === id))[0]).pipe(delay(2000));
+   return this.http.get<Dish>(baseURL + 'dishes/' + id);
   } 
 
  /* getFeaturedDish(): Promise<Dish> {
@@ -51,10 +60,12 @@ export class DishService {
   }*/
 
   getFeaturedDish(): Observable<Dish> {
-    return of(DISHES.filter((dish) => dish.featured)[0]).pipe(delay(2000));
+   // return of(DISHES.filter((dish) => dish.featured)[0]).pipe(delay(2000));
+   return this.http.get<Dish[]>(baseURL + 'dishes?featured=true').pipe(map(dishes => dishes[0]));
   }
 
-  getDishIds(): Observable<number[]> {
-    return of(DISHES.map(dish => dish.id )).delay(2000);
+  getDishIds(): Observable<number[]| any> {
+   // return of(DISHES.map(dish => dish.id )).delay(2000);
+   return this.getDishes().pipe(map(dishes => dishes.map(dish => dish.id)));
   }
 }

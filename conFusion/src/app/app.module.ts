@@ -28,6 +28,8 @@ import { ContactComponent } from './contact/contact.component';
 import { DishService } from './services/dish.service';
 import { PromotionService } from './services/promotion.service';
 import { LeaderService } from './services/leader.service';
+import { ProcessHTTPMsgService } from './services/process-httpmsg.service';
+
 
 
 import { AppRoutingModule } from './app-routing/app-routing.module';
@@ -41,6 +43,14 @@ import { FormsModule } from '@angular/forms';
 import{ ReactiveFormsModule } from '@angular/forms'; 
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import {MatSliderModule} from '@angular/material/slider';
+
+import { HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
+import { GestureConfig } from '@angular/material';
+
+import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
+import { baseURL } from './shared/baseurl';
 
 
 @NgModule({
@@ -66,16 +76,19 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     MatButtonModule,
     MatDialogModule,
     MatFormFieldModule, 
+    HttpModule,
+    HttpClientModule,
     MatInputModule,
     MatCheckboxModule,
     FormsModule,
     ReactiveFormsModule,
     MatSelectModule,
     MatSlideToggleModule,
+    MatSliderModule,
     MatProgressSpinnerModule,
     AppRoutingModule
   ],
-  providers: [ DishService , PromotionService, LeaderService],
+  providers: [ DishService , PromotionService, LeaderService, { provide: HAMMER_GESTURE_CONFIG, useClass: GestureConfig },{provide: 'BaseURL', useValue: baseURL}, ProcessHTTPMsgService],
   entryComponents:[ LoginComponent ],
   bootstrap: [AppComponent]
 })

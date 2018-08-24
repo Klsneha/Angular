@@ -5,6 +5,7 @@
 </mat-toolbar>
 
 <p>{{ user | json }}</p>
+<p>{{user.username}}</p>
 
 <form novalidate #loginForm="ngForm" (ngSubmit)="onSubmit()">
 
