@@ -78,8 +78,12 @@
       </div>
 
 
-      <div [hidden]="dish">
+      <div [hidden]="dish || errMess">
         <mat-spinner></mat-spinner><h4>Loading . . . Please Wait</h4>
+      </div>
+      <div *ngIf="errMess">
+        <h2>Error</h2>
+        <h4>{{errMess}}</h4>
       </div>
 
 </div>
@@ -118,7 +122,7 @@ fxLayoutGap.xs="0">
            </p>
            <button type="submit" mat-button class="background-primary text-floral-white" [disabled]="cForm.form.invalid" >Submit</button>
      </form>
-   </div>
+   </div> 
    </div>
 
 
