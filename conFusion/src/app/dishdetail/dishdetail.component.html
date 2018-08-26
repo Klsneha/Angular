@@ -13,7 +13,7 @@
     <p>Display the details of the Dish here</p>
   </div>-->
 
-  <div fxFlex="40" *ngIf="dish" [@visibility]="visibility">
+  <div fxFlex="40" *ngIf="dish" [@visibility]="visibility" [@expand]>
       <mat-card>
         <mat-card-header>
           <mat-card-title>
@@ -58,7 +58,7 @@
       </mat-grid-list>
     </div>-->
 
-    <div fxFlex="40" *ngIf="dish" [@visibility]="visibility">
+    <div fxFlex="40" *ngIf="dish" [@visibility]="visibility" [@expand]>
       <mat-card height="400px">
           <mat-card-header>
             <mat-card-title>
