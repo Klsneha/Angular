@@ -52,6 +52,9 @@ import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 import { baseURL } from './shared/baseurl';
 
+import { RestangularModule, Restangular } from 'ngx-restangular';
+import { RestangularConfigFactory } from './shared/restConfig';
+
 
 @NgModule({
   declarations: [
@@ -86,6 +89,7 @@ import { baseURL } from './shared/baseurl';
     MatSlideToggleModule,
     MatSliderModule,
     MatProgressSpinnerModule,
+    RestangularModule.forRoot(RestangularConfigFactory),
     AppRoutingModule
   ],
   providers: [ DishService , PromotionService, LeaderService, { provide: HAMMER_GESTURE_CONFIG, useClass: GestureConfig },{provide: 'BaseURL', useValue: baseURL}, ProcessHTTPMsgService],

@@ -16,6 +16,8 @@ import { baseURL } from '../shared/baseurl';
 import {Http, Response} from '@angular/http';
 import {ProcessHTTPMsgService} from './process-httpmsg.service';
 
+import { Restangular } from 'ngx-restangular';
+
 
 
 @Injectable({
@@ -24,7 +26,8 @@ import {ProcessHTTPMsgService} from './process-httpmsg.service';
 export class DishService {
 
   constructor(private http: HttpClient,
-    private processHTTPMsgService: ProcessHTTPMsgService) { }
+    private processHTTPMsgService: ProcessHTTPMsgService,
+    private restangular: Restangular) { }
 
   //getDishes(): Promise<Dish[]> {
    // return Promise.resolve(DISHES);
@@ -37,8 +40,11 @@ export class DishService {
 
  getDishes(): Observable<Dish[]> {
  // return of(DISHES).pipe(delay(2000));
- return this.http.get<Dish[]>(baseURL + 'dishes')
- .pipe(catchError(this.processHTTPMsgService.handleError));
+ //Error Handling and getting from jsonserver
+ /*return this.http.get<Dish[]>(baseURL + 'dishes')
+ .pipe(catchError(this.processHTTPMsgService.handleError));*/
+ return this.restangular.all('dishes').getList();
+
 }
 
   //getDish(id: number):Promise<Dish> {
@@ -50,8 +56,10 @@ export class DishService {
 
   getDish(id: number): Observable<Dish> {
    // return of(DISHES.filter((dish) => (dish.id === id))[0]).pipe(delay(2000));
-   return this.http.get<Dish>(baseURL + 'dishes/' + id)
-   .pipe(catchError(this.processHTTPMsgService.handleError));
+  //Json server and error handling
+   /* return this.http.get<Dish>(baseURL + 'dishes/' + id)
+   .pipe(catchError(this.processHTTPMsgService.handleError));*/
+   return  this.restangular.one('dishes', id).get();
   } 
 
  /* getFeaturedDish(): Promise<Dish> {
@@ -64,13 +72,20 @@ export class DishService {
 
   getFeaturedDish(): Observable<Dish> {
    // return of(DISHES.filter((dish) => dish.featured)[0]).pipe(delay(2000));
-   return this.http.get<Dish[]>(baseURL + 'dishes?featured=true').pipe(map(dishes => dishes[0]))
-   .pipe(catchError(this.processHTTPMsgService.handleError));
+  //jon server and error handling
+   /*return this.http.get<Dish[]>(baseURL + 'dishes?featured=true').pipe(map(dishes => dishes[0]))
+   .pipe(catchError(this.processHTTPMsgService.handleError));*/
+   return this.restangular.all('dishes').getList({featured: true})
+   .pipe(map(dishes => dishes[0]));
   }
 
   getDishIds(): Observable<number[]| any> {
    // return of(DISHES.map(dish => dish.id )).delay(2000);
-   return this.getDishes().pipe(map(dishes => dishes.map(dish => dish.id)))
-   .pipe(catchError(error => error));
+  //json server and error handling
+  /* return this.getDishes().pipe(map(dishes => dishes.map(dish => dish.id)))
+   .pipe(catchError(error => error));*/
+   return this.getDishes()
+      .pipe(map(dishes => dishes.map(dish => dish.id)),
+        catchError(error => error ));  
   }
 }
