@@ -230,5 +230,66 @@
       "description": "Award winning three-star Michelin chef with wide International experience having worked closely with whos-who in the culinary world, he specializes in creating mouthwatering Indo-Italian fusion experiences. He says, Put together the cuisines from the two craziest cultures, and you get a winning hit! Amma Mia!"
     }
   ],
-  "feedback": []
+  "feedback": [
+    {
+      "firstname": "xfd",
+      "lastname": "fgb",
+      "telnum": "345",
+      "email": "ffg@gfdbf",
+      "agree": false,
+      "contacttype": "None",
+      "message": "gdgfg",
+      "id": 1
+    },
+    {
+      "firstname": "ja",
+      "lastname": "ban",
+      "telnum": "5",
+      "email": "a@asu",
+      "agree": false,
+      "contacttype": "None",
+      "message": "",
+      "id": 2
+    },
+    {
+      "firstname": "ja",
+      "lastname": "ba",
+      "telnum": "0",
+      "email": "jahn@gmail",
+      "agree": false,
+      "contacttype": "Tel",
+      "message": "sd",
+      "id": 3
+    },
+    {
+      "firstname": "ja",
+      "lastname": "kandukuri",
+      "telnum": "0",
+      "email": "jahna@gmail",
+      "agree": false,
+      "contacttype": "None",
+      "message": "",
+      "id": 4
+    },
+    {
+      "firstname": "sneha",
+      "lastname": "kandukuri",
+      "telnum": "0123",
+      "email": "jahna@gmail",
+      "agree": false,
+      "contacttype": "Tel",
+      "message": "dsada",
+      "id": 5
+    },
+    {
+      "firstname": "jja",
+      "lastname": "bn",
+      "telnum": "0",
+      "email": "jahna@gmail",
+      "agree": false,
+      "contacttype": "None",
+      "message": "",
+      "id": 6
+    }
+  ]
 }
