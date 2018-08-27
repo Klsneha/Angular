@@ -7,12 +7,19 @@ import { Observable, of } from 'rxjs';
 //import { delay } from 'rxjs-compat/operator/delay';
 import { delay } from 'rxjs/operators';
 
+import { Restangular } from 'ngx-restangular';
+import { map, catchError } from 'rxjs/operators';
+import { ProcessHTTPMsgService } from './process-httpmsg.service';
+import { HttpClient } from '@angular/common/http';
+
 @Injectable({
   providedIn: 'root'
 })
 export class PromotionService {
 
-  constructor() { }
+  constructor(private restangular: Restangular,
+    private http: HttpClient,
+    private processHTTPMsgService: ProcessHTTPMsgService ) { }
 
 
   
@@ -20,7 +27,10 @@ export class PromotionService {
 
   getPromotions(): Observable<Promotion[]> {
     //return Promise.resolve(PROMOTIONS);
-   return of(PROMOTIONS).pipe(delay(2000));
+   //return of(PROMOTIONS).pipe(delay(2000));
+   return this.restangular.all('promotions').getList()
+   .pipe(catchError(this.processHTTPMsgService.handleError));
+
   }
   
 
@@ -32,7 +42,9 @@ export class PromotionService {
   }*/
 
   getPromotion(id: number): Observable<Promotion> {
-    return of(PROMOTIONS.filter((Promotion)=>(Promotion.id===id))[0]).pipe(delay(2000));
+   // return of(PROMOTIONS.filter((Promotion)=>(Promotion.id===id))[0]).pipe(delay(2000));
+   return  this.restangular.one('promotions', id).get()
+   .pipe(catchError(this.processHTTPMsgService.handleError));
   }
 
   
@@ -46,6 +58,9 @@ export class PromotionService {
   }*/
 
   getFeaturedPromotion(): Observable<Promotion> {
-    return of(PROMOTIONS.filter((Promotion)=>(Promotion.featured))[0]).pipe(delay(2000));
+    //return of(PROMOTIONS.filter((Promotion)=>(Promotion.featured))[0]).pipe(delay(2000));
+    return this.restangular.all('promotions').getList({featured: true})
+      .pipe(map(promotions => promotions[0]))
+      .pipe(catchError(this.processHTTPMsgService.handleError));
   }
 }
